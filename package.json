@@ -1,0 +1,22 @@
+{
+  "name": "highcharts-academy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highcharts-academy/repository.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/highcharts-academy/repository/issues"
+  },
+  "homepage": "https://github.com/highcharts-academy/repository#readme",
+  "devDependencies": {
+    "cypress": "^13.13.1"
+  }
+}
