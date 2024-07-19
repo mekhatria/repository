@@ -98,7 +98,6 @@ describe('00-initial-chart-tests', () => {
       const modules = ['exporting', 'accessibility'];
 
       modules.forEach(module => {
-        console.log(chart)
         expect(chart[module], `${module} should be imported`).to.exist;
       });
     });
