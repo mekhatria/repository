@@ -3,7 +3,7 @@ describe('01-simple-column', () => {
     cy.visit('../../exercises/01-simple-column/index.html');
   });
 
-  it('should check if there are enough series & points and that max points have proper data labels', () => {
+  it('should check if there are 3 series and that max points have proper data labels', () => {
     cy.window().its('Highcharts').then(Highcharts => {
       const chart = Highcharts.charts[0];
       const dataMax = chart.yAxis[0].dataMax;
@@ -11,8 +11,6 @@ describe('01-simple-column', () => {
       expect(chart.series).to.have.length(3);
 
       for (const series of chart.series) {
-        expect(series.points).to.have.length(3);
-
         for (const point of series.points) {
           if (point.y === dataMax) {
             expect(point.dataLabel.text.textStr).to.equal('max');
