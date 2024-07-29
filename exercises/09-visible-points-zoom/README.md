@@ -4,12 +4,12 @@ Create a line chart with 100 random integer values (`0 < y < 100`) and ‘xy’ 
 All custom-rendered objects should be stored in the chart object. Each custom-rendered object should follow this format: 
 ```javascript
 {
-	coordinates: {
-		x: value,
-		y: value
+  coordinates: {
+    x: value,
+    y: value
   },
   label: {
-	  customObject
+     customObject
   }
 }
 ```
