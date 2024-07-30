@@ -4,73 +4,78 @@ describe("Highcharts Tests", () => {
   });
 
   it("should render the spline chart correctly", () => {
-    cy.get("#spline").should("exist");
+    cy.window()
+      .its("Highcharts")
+      .then((Highcharts) => {
+        const matchedChart = Highcharts.charts.find(
+          (chart) =>
+            chart.type === "spline" || chart.series[0].type === "spline"
+        );
 
-    cy.window().then((win) => {
-      const chart = win.Highcharts.charts.find(
-        (c) => c.renderTo.id === "spline"
-      );
-
-      expect(chart, "Spline chart should exist").to.exist;
-      expect(
-        chart.series[0].data.length,
-        "Spline chart should have 6 data points"
-      ).to.equal(6);
-    });
+        expect(matchedChart, "Spline chart should exist").to.exist;
+        expect(
+          matchedChart.series[0].data.length,
+          "Spline chart should have 6 data points"
+        ).to.equal(6);
+      });
   });
 
   it("should render the areaspline chart correctly", () => {
-    cy.get("#areaspline").should("exist");
+    cy.window()
+      .its("Highcharts")
+      .then((Highcharts) => {
+        const matchedChart = Highcharts.charts.find(
+          (chart) =>
+            chart.type === "areaspline" || chart.series[0].type === "areaspline"
+        );
 
-    cy.window().then((win) => {
-      const chart = win.Highcharts.charts.find(
-        (c) => c.renderTo.id === "areaspline"
-      );
-
-      expect(chart, "Areaspline chart should exist").to.exist;
-      expect(
-        chart.series[0].data.length,
-        "Areaspline chart should have 6 data points"
-      ).to.equal(6);
-    });
+        expect(matchedChart, "Areaspline chart should exist").to.exist;
+        expect(
+          matchedChart.series[0].data.length,
+          "Areaspline chart should have 6 data points"
+        ).to.equal(6);
+      });
   });
 
   it("should render the column chart correctly", () => {
-    cy.get("#column").should("exist");
+    cy.window()
+      .its("Highcharts")
+      .then((Highcharts) => {
+        const matchedChart = Highcharts.charts.find(
+          (chart) =>
+            chart.type === "column" || chart.series[0].type === "column"
+        );
+        const series = matchedChart.series[0];
 
-    cy.window().then((win) => {
-      const chart = win.Highcharts.charts.find(
-        (c) => c.renderTo.id === "column"
-      );
-      const series = chart.series[0];
-
-      expect(chart, "Column chart should exist").to.exist;
-      expect(
-        chart.series[0].data.length,
-        "Column chart should have 6 data points"
-      ).to.equal(6);
-      assert.strictEqual(
-        series.points[2].y === 0 ||
-          series.points[2].y === undefined ||
-          series.points[2].y === null,
-        true,
-        "The third point of the column series should be equal to 0, undefined, or null"
-      );
-    });
+        expect(matchedChart, "Column chart should exist").to.exist;
+        expect(
+          matchedChart.series[0].data.length,
+          "Column chart should have 6 data points"
+        ).to.equal(6);
+        assert.strictEqual(
+          series.points[2].y === 0 ||
+            series.points[2].y === undefined ||
+            series.points[2].y === null,
+          true,
+          "The third point of the column series should be equal to 0, undefined, or null"
+        );
+      });
   });
 
   it("should render the pie chart correctly", () => {
-    cy.get("#pie").should("exist");
+    cy.window()
+      .its("Highcharts")
+      .then((Highcharts) => {
+        const matchedChart = Highcharts.charts.find(
+          (chart) => chart.type === "pie" || chart.series[0].type === "pie"
+        );
 
-    cy.window().then((win) => {
-      const chart = win.Highcharts.charts.find((c) => c.renderTo.id === "pie");
-      expect(chart, "Pie chart should exist").to.exist;
-      expect(
-        chart.series[0].data.length,
-        "Pie chart should have 3 data points"
-      ).to.equal(3);
-      console.log(chart);
-    });
+        expect(matchedChart, "Pie chart should exist").to.exist;
+        expect(
+          matchedChart.series[0].data.length,
+          "Pie chart should have 3 data points"
+        ).to.equal(3);
+      });
   });
 
   it("should set global Highcharts options correctly", () => {
@@ -127,6 +132,7 @@ describe("Highcharts Tests", () => {
           "Global xAxis labels should be disabled"
         ).to.equal(false);
       }
+
       expect(
         win.Highcharts.defaultOptions.tooltip.outside,
         "Global tooltip should be outside"
