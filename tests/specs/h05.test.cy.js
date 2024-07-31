@@ -1,13 +1,10 @@
-describe('template spec', { testIsolation: false }, () => {
+describe('template spec', () => {
   const p1 = [500, 200]; // click position
   const p2 = [300, 250]; // mousemove position
 
-  before(() => {
-    cy.visit('../../exercises/05-click-mousemove-cursor/index.html');
-  });
-
   beforeEach(() => {
     cy.viewport(800, 600);
+    cy.visit('../../exercises/05-click-mousemove-cursor/index.html');
   });
 
   it('chart should exist', () => {
@@ -33,6 +30,8 @@ describe('template spec', { testIsolation: false }, () => {
   });
 
   it('position of the `chart-circle` and `chart-text` should be correct after window resize', () => {
+    cy.get('.highcharts-container').trigger('click', ...p1);
+
     cy.window().its('Highcharts').then(Highcharts => {
       const chart = Highcharts.charts[0];
       const xAxis = chart.xAxis[0];
