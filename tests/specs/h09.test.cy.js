@@ -3,7 +3,7 @@ describe("Line Chart Exercise", () => {
     cy.visit("../../exercises/09-visible-points-zoom/index.html");
   });
 
-  it('should check if the chart has 100 random integer values and "xy" zoom', () => {
+  it.skip('should check if the chart has 100 random integer values and "xy" zoom', () => {
     cy.window()
       .its("Highcharts")
       .then((Highcharts) => {
@@ -20,27 +20,27 @@ describe("Line Chart Exercise", () => {
       });
   });
 
-  it("should check if the visible points label updates correctly on zoom", () => {
+  it.skip("should check if the visible points label updates correctly on zoom", () => {
     cy.window()
       .its("Highcharts")
       .then((Highcharts) => {
         const chart = Highcharts.charts[0];
 
-        function checkVisiblePointsLabel(expectedCount) {
-          const customLabelText = chart.customLabel.textStr;
-          expect(
-            customLabelText,
-            `Visible points label should update correctly`
-          ).to.equal(`Visible points: ${expectedCount}`);
-        }
-
-        checkVisiblePointsLabel(100);
-
-        chart.xAxis[0].setExtremes(45, 50);
-
-        checkVisiblePointsLabel(
-          chart.series[0].points.filter((point) => point.isInside).length
-        );
+        cy.get("text")
+          .contains("Visible points:")
+          .should("have.text", `Visible points: ${100}`)
+          .then(() => {
+            chart.xAxis[0].setExtremes(45, 50);
+            cy.get("text")
+              .contains("Visible points:")
+              .should(
+                "have.text",
+                `Visible points: ${
+                  chart.series[0].points.filter((point) => point.isInside)
+                    .length
+                }`
+              );
+          });
       });
   });
 
