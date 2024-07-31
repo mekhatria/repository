@@ -3,7 +3,7 @@ describe("Line Chart Exercise", () => {
     cy.visit("../../exercises/09-visible-points-zoom/index.html");
   });
 
-  it.skip('should check if the chart has 100 random integer values and "xy" zoom', () => {
+  it('should check if the chart has 100 random integer values and "xy" zoom', () => {
     cy.window()
       .its("Highcharts")
       .then((Highcharts) => {
@@ -20,7 +20,7 @@ describe("Line Chart Exercise", () => {
       });
   });
 
-  it.skip("should check if the visible points label updates correctly on zoom", () => {
+  it("should check if the visible points label updates correctly on zoom", () => {
     cy.window()
       .its("Highcharts")
       .then((Highcharts) => {
