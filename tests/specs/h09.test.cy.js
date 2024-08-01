@@ -53,56 +53,73 @@ describe("Line Chart Exercise", () => {
         const dataMax = Math.max(...series.yData);
         const maxPoints = series.points.filter((point) => point.y === dataMax);
 
-        cy.get('.highcharts-root')
-        .find('text.maxPointLabel')
-        .should('have.length', maxPoints.length)
-        .each(($el) => {
-          cy.wrap($el)
-            .should('have.text', dataMax)
-            .then(($element) => {
-              const rect = $element[0].getBoundingClientRect();
-              const x = rect.x;
-              const y = rect.y;
-      
-              let matchFound = false;
-              for (const p of maxPoints) {
-                if (Math.abs(p.plotX + p.series.chart.plotLeft - x) < 30 && Math.abs(p.plotY + p.series.chart.plotTop - y) < 30) {
-                  assert.closeTo(p.plotX + p.series.chart.plotLeft, x, 30, 'The x-coordinate of the custom max point label should be close to the max point x-coordinate.')
-                  assert.closeTo(p.plotY + p.series.chart.plotTop, y, 30,'The y-coordinate of the custom max point label should be close to the max point y-coordinate.')                  
-                  matchFound = true;
-                  break;
-                }
-              }
+        cy.get(".highcharts-root")
+          .find("text.maxPointLabel")
+          .should("have.length", maxPoints.length)
+          .each(($el) => {
+            cy.wrap($el)
+              .should("have.text", dataMax)
+              .then(($element) => {
+                const rect = $element[0].getBoundingClientRect();
+                const x = rect.x;
+                const y = rect.y;
 
-              if (!matchFound) {
-                assert.fail('No matching points found for the element.');
-              }
-            });
-        });
-      
-        cy.get('.highcharts-root')
-        .find('circle.xAxisPoint')
-        .should('have.length', maxPoints.length)
-        .each(($el) => {
-          cy.wrap($el)
-            .then(($element) => {
+                let matchFound = false;
+                for (const p of maxPoints) {
+                  if (
+                    Math.abs(p.plotX + p.series.chart.plotLeft - x) < 30 &&
+                    Math.abs(p.plotY + p.series.chart.plotTop - y) < 30
+                  ) {
+                    assert.closeTo(
+                      p.plotX + p.series.chart.plotLeft,
+                      x,
+                      30,
+                      "The x-coordinate of the custom max point label should be close to the max point x-coordinate."
+                    );
+                    assert.closeTo(
+                      p.plotY + p.series.chart.plotTop,
+                      y,
+                      30,
+                      "The y-coordinate of the custom max point label should be close to the max point y-coordinate."
+                    );
+                    matchFound = true;
+                    break;
+                  }
+                }
+
+                if (!matchFound) {
+                  assert.fail("No matching points found for the element.");
+                }
+              });
+          });
+
+        cy.get(".highcharts-root")
+          .find("circle.xAxisPoint")
+          .should("have.length", maxPoints.length)
+          .each(($el) => {
+            cy.wrap($el).then(($element) => {
               const rect = $element[0].getBoundingClientRect();
               const x = rect.x;
-      
+
               let matchFound = false;
               for (const p of maxPoints) {
                 if (Math.abs(p.plotX + p.series.chart.plotLeft - x) < 30) {
-                  assert.closeTo(p.plotX + p.series.chart.plotLeft, x, 30, 'The x-coordinate of the custom xAxis circle should be close to the max point x-coordinate.')
+                  assert.closeTo(
+                    p.plotX + p.series.chart.plotLeft,
+                    x,
+                    30,
+                    "The x-coordinate of the custom xAxis circle should be close to the max point x-coordinate."
+                  );
                   matchFound = true;
                   break;
                 }
               }
 
               if (!matchFound) {
-                assert.fail('No matching xAxis circles found for the element.');
+                assert.fail("No matching xAxis circles found for the element.");
               }
             });
-        });
+          });
       });
   });
 });
