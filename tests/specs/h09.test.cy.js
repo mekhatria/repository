@@ -53,50 +53,55 @@ describe("Line Chart Exercise", () => {
         const dataMax = Math.max(...series.yData);
         const maxPoints = series.points.filter((point) => point.y === dataMax);
 
-        const customMaxPointLabels = chart.maxPointLabels;
-        const customXAxisPoints = chart.xAxisPoints;
+        cy.get('.highcharts-root')
+        .find('text.maxPointLabel')
+        .should('have.length', maxPoints.length)
+        .each(($el) => {
+          cy.wrap($el)
+            .should('have.text', dataMax)
+            .then(($element) => {
+              const rect = $element[0].getBoundingClientRect();
+              const x = rect.x;
+              const y = rect.y;
+      
+              let matchFound = false;
+              for (const p of maxPoints) {
+                if (Math.abs(p.plotX + p.series.chart.plotLeft - x) < 30 && Math.abs(p.plotY + p.series.chart.plotTop - y) < 30) {
+                  assert.closeTo(p.plotX + p.series.chart.plotLeft, x, 30, 'The x-coordinate of the custom max point label should be close to the max point x-coordinate.')
+                  assert.closeTo(p.plotY + p.series.chart.plotTop, y, 30,'The y-coordinate of the custom max point label should be close to the max point y-coordinate.')                  
+                  matchFound = true;
+                  break;
+                }
+              }
 
-        // Check that the number of labels and dots matches the number of max points
-        expect(
-          customMaxPointLabels.length,
-          "The number of customMaxPointLabels should match the number of max points"
-        ).to.equal(maxPoints.length);
+              if (!matchFound) {
+                assert.fail('No matching points found for the element.');
+              }
+            });
+        });
+      
+        cy.get('.highcharts-root')
+        .find('circle.xAxisPoint')
+        .should('have.length', maxPoints.length)
+        .each(($el) => {
+          cy.wrap($el)
+            .then(($element) => {
+              const rect = $element[0].getBoundingClientRect();
+              const x = rect.x;
+      
+              let matchFound = false;
+              for (const p of maxPoints) {
+                if (Math.abs(p.plotX + p.series.chart.plotLeft - x) < 30) {
+                  assert.closeTo(p.plotX + p.series.chart.plotLeft, x, 30, 'The x-coordinate of the custom xAxis circle should be close to the max point x-coordinate.')
+                  matchFound = true;
+                  break;
+                }
+              }
 
-        expect(
-          customXAxisPoints.length,
-          "The number of customXAxisPoints should match the number of max points"
-        ).to.equal(maxPoints.length);
-
-        maxPoints.forEach((point) => {
-          const matchingCustomLabels = customMaxPointLabels.filter(
-            (customMaxPointLabel) =>
-              customMaxPointLabel.coordinates.x === point.x &&
-              customMaxPointLabel.coordinates.y === point.y
-          );
-
-          const matchingCustomDots = customXAxisPoints.filter(
-            (customXAxisPoint) =>
-              customXAxisPoint.coordinates.x === point.x &&
-              customXAxisPoint.coordinates.y === point.y
-          );
-
-          // Check that the correct label displays the maximum y value
-          matchingCustomLabels.forEach((matchingCustomLabel) => {
-            const label = matchingCustomLabel.label;
-            expect(
-              label.textStr,
-              `Max point label placed on the ${matchingCustomLabel.coordinates.x} x position should display the maximum y value`
-            ).to.equal(point.y);
-          });
-
-          // Check that the custom red dot is placed on the correct x position
-          matchingCustomDots.forEach((matchingCustomDot) => {
-            const dotCoordinates = matchingCustomDot.coordinates;
-            expect(
-              dotCoordinates.x,
-              `The custom red dot should be placed on the ${point.x} x position`
-            ).to.equal(point.x);
-          });
+              if (!matchFound) {
+                assert.fail('No matching xAxis circles found for the element.');
+              }
+            });
         });
       });
   });
