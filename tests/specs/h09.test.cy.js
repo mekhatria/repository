@@ -94,7 +94,7 @@ describe("Line Chart Exercise", () => {
           });
 
         cy.get(".highcharts-root")
-          .find("circle.xAxisPoint")
+          .find("circle.x-axis-point")
           .should("have.length", maxPoints.length)
           .each(($el) => {
             cy.wrap($el).then(($element) => {
