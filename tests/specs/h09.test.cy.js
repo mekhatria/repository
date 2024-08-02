@@ -54,7 +54,7 @@ describe("Line Chart Exercise", () => {
         const maxPoints = series.points.filter((point) => point.y === dataMax);
 
         cy.get(".highcharts-root")
-          .find("text.maxPointLabel")
+          .find("text.max-point-label")
           .should("have.length", maxPoints.length)
           .each(($el) => {
             cy.wrap($el)
