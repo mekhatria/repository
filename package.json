@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run"
+    "test-all": "cypress run",
+    "test-0": "cypress run --spec tests/specs/h00.test.cy.js",
+    "test-1": "cypress run --spec tests/specs/h01.test.cy.js",
+    "test-3": "cypress run --spec tests/specs/h03.test.cy.js",
+    "test-5": "cypress run --spec tests/specs/h05.test.cy.js",
+    "test-7": "cypress run --spec tests/specs/h07.test.cy.js",
+    "test-8": "cypress run --spec tests/specs/h08.test.cy.js",
+    "test-9": "cypress run --spec tests/specs/h09.test.cy.js",
+    "test-12": "cypress run --spec tests/specs/h12.test.cy.js"
   },
   "repository": {
     "type": "git",
