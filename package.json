@@ -7,12 +7,12 @@
     "test-all": "cypress run",
     "test-00": "cypress run --spec tests/specs/h00.test.cy.js",
     "test-01": "cypress run --spec tests/specs/h01.test.cy.js",
+    "test-02": "cypress run --spec tests/specs/h02.test.cy.js",
     "test-03": "cypress run --spec tests/specs/h03.test.cy.js",
+    "test-04": "cypress run --spec tests/specs/h04.test.cy.js",
     "test-05": "cypress run --spec tests/specs/h05.test.cy.js",
-    "test-07": "cypress run --spec tests/specs/h07.test.cy.js",
-    "test-08": "cypress run --spec tests/specs/h08.test.cy.js",
-    "test-09": "cypress run --spec tests/specs/h09.test.cy.js",
-    "test-12": "cypress run --spec tests/specs/h12.test.cy.js"
+    "test-06": "cypress run --spec tests/specs/h06.test.cy.js",
+    "test-07": "cypress run --spec tests/specs/h07.test.cy.js"
   },
   "repository": {
     "type": "git",
