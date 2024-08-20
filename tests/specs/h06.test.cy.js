@@ -1,6 +1,6 @@
 describe("Line Chart Exercise", () => {
   beforeEach("passes", () => {
-    cy.visit("../../exercises/09-visible-points-zoom/index.html");
+    cy.visit("../../exercises/06-visible-points-zoom/index.html");
   });
 
   it('should check if the chart has 100 random integer values and "xy" zoom', () => {

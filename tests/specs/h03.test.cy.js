@@ -1,151 +1,55 @@
-describe("Highcharts Tests", () => {
+describe('template spec', () => {
+  const p1 = [500, 200]; // click position
+  const p2 = [300, 250]; // mousemove position
+
   beforeEach(() => {
-    cy.visit("../../exercises/03-minimal-charts/index.html");
+    cy.viewport(800, 600);
+    cy.visit('../../exercises/03-click-mousemove-cursor/index.html');
   });
 
-  it("should render the spline chart correctly", () => {
-    cy.window()
-      .its("Highcharts")
-      .then((Highcharts) => {
-        const matchedChart = Highcharts.charts.find(
-          (chart) =>
-            chart.type === "spline" || chart.series[0].type === "spline"
-        );
-
-        expect(matchedChart, "Spline chart should exist").to.exist;
-        expect(
-          matchedChart.series[0].data.length,
-          "Spline chart should have 6 data points"
-        ).to.equal(6);
-      });
+  it('chart should exist', () => {
+    cy.get('.highcharts-container').should('be.visible');
   });
 
-  it("should render the areaspline chart correctly", () => {
-    cy.window()
-      .its("Highcharts")
-      .then((Highcharts) => {
-        const matchedChart = Highcharts.charts.find(
-          (chart) =>
-            chart.type === "areaspline" || chart.series[0].type === "areaspline"
-        );
+  it('the `mouse-circle` should follow the mouse', () => {
+    cy.get('.highcharts-container').trigger('mousemove', ...p2);
 
-        expect(matchedChart, "Areaspline chart should exist").to.exist;
-        expect(
-          matchedChart.series[0].data.length,
-          "Areaspline chart should have 6 data points"
-        ).to.equal(6);
-      });
+    cy.get('.mouse-circle').should('be.visible')
+      .should('have.attr', 'cx', `${p2[0]}`)
+      .should('have.attr', 'cy', `${p2[1]}`);
   });
 
-  it("should render the column chart correctly", () => {
-    cy.window()
-      .its("Highcharts")
-      .then((Highcharts) => {
-        const matchedChart = Highcharts.charts.find(
-          (chart) =>
-            chart.type === "column" || chart.series[0].type === "column"
-        );
-        const series = matchedChart.series[0];
+  it('the `chart-circle` and `chart-text` should be created on click', () => {
+    cy.get('.highcharts-container').trigger('click', ...p1);
 
-        expect(matchedChart, "Column chart should exist").to.exist;
-        expect(
-          matchedChart.series[0].data.length,
-          "Column chart should have 6 data points"
-        ).to.equal(6);
-        assert.strictEqual(
-          series.points[2].y === 0 ||
-            series.points[2].y === undefined ||
-            series.points[2].y === null,
-          true,
-          "The third point of the column series should be equal to 0, undefined, or null"
-        );
-      });
+    cy.get('.chart-circle').should('be.visible')
+    .should('have.attr', 'cx', `${p1[0]}`)
+    .should('have.attr', 'cy', `${p1[1]}`);
+
+    cy.get('.chart-text').should('be.visible');
   });
 
-  it("should render the pie chart correctly", () => {
-    cy.window()
-      .its("Highcharts")
-      .then((Highcharts) => {
-        const matchedChart = Highcharts.charts.find(
-          (chart) => chart.type === "pie" || chart.series[0].type === "pie"
-        );
+  it('position of the `chart-circle` and `chart-text` should be correct after window resize', () => {
+    cy.get('.highcharts-container').trigger('click', ...p1);
 
-        expect(matchedChart, "Pie chart should exist").to.exist;
-        expect(
-          matchedChart.series[0].data.length,
-          "Pie chart should have 3 data points"
-        ).to.equal(3);
-      });
-  });
+    cy.window().its('Highcharts').then(Highcharts => {
+      const chart = Highcharts.charts[0];
+      const xAxis = chart.xAxis[0];
+      const yAxis = chart.yAxis[0];
 
-  it("should set global Highcharts options correctly", () => {
-    cy.window().then((win) => {
-      expect(
-        win.Highcharts.defaultOptions.title.text,
-        "Global title text should be empty"
-      ).to.equal("");
-      expect(
-        win.Highcharts.defaultOptions.legend.enabled,
-        "Global legend should be disabled"
-      ).to.equal(false);
-      expect(
-        win.Highcharts.defaultOptions.credits.enabled,
-        "Global credits should be disabled"
-      ).to.equal(false);
+      const x = xAxis.toValue(p1[0]);
+      const y = yAxis.toValue(p1[1]);
 
-      if (win.Highcharts.defaultOptions.yAxis.visible === false) {
-        expect(
-          win.Highcharts.defaultOptions.yAxis.visible,
-          "Global yAxis visible should be hidden"
-        ).to.equal(false);
-      } else {
-        expect(
-          win.Highcharts.defaultOptions.yAxis.gridLineWidth,
-          "Global yAxis gridLineWidth should be 0"
-        ).to.equal(0);
-        expect(
-          win.Highcharts.defaultOptions.yAxis.title.text,
-          "Global yAxis title text should be empty"
-        ).to.equal("");
-        expect(
-          win.Highcharts.defaultOptions.yAxis.labels.enabled,
-          "Global yAxis labels should be disabled"
-        ).to.equal(false);
-      }
+      cy.get('.chart-text').should('contain', `x: ${x.toFixed(2)}, y: ${y.toFixed(2)}`);
 
-      if (win.Highcharts.defaultOptions.xAxis.visible === false) {
-        expect(
-          win.Highcharts.defaultOptions.xAxis.visible,
-          "Global xAxis visible should be hidden"
-        ).to.equal(false);
-      } else {
-        expect(
-          win.Highcharts.defaultOptions.xAxis.lineWidth,
-          "Global xAxis lineWidth should be 0"
-        ).to.equal(0);
-        expect(
-          win.Highcharts.defaultOptions.xAxis.tickLength,
-          "Global xAxis tickLength should be 0"
-        ).to.equal(0);
-        expect(
-          win.Highcharts.defaultOptions.xAxis.labels.enabled,
-          "Global xAxis labels should be disabled"
-        ).to.equal(false);
-      }
+      cy.viewport(400, 500);
 
-      expect(
-        win.Highcharts.defaultOptions.tooltip.outside,
-        "Global tooltip should be outside"
-      ).to.equal(true);
+      const pX = xAxis.toPixels(x);
+      const pY = yAxis.toPixels(y);
 
-      expect(
-        win.Highcharts.defaultOptions.plotOptions.series.marker.enabled,
-        "Global series marker should be disabled"
-      ).to.equal(false);
-      expect(
-        win.Highcharts.defaultOptions.plotOptions.series.dataLabels.enabled,
-        "Global series dataLabels should be disabled"
-      ).to.equal(false);
+      cy.get('.chart-circle')
+        .should('have.attr', 'cx', `${pX}`,)
+        .should('have.attr', 'cy', `${pY}`);
     });
   });
 });

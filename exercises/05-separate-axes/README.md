@@ -1,4 +1,4 @@
-# Exercise 8 - Separate Axes
+# Exercise 05 - Separate Axes
 
 Create a bar chart with two separate red series on the separate axes. For reference, see the image below.
 

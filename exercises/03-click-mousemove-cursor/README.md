@@ -1,4 +1,4 @@
-# Exercise 5 - Click Mousemove Cursor
+# Exercise 03 - Click Mousemove Cursor
 
 Render a blue circle following the cursor, with a class name `'mouse-circle'`.
 Save it on click like shown on the GIF below (saved circles should be the `'chart-circle'` CSS class name).

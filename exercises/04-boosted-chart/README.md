@@ -1,4 +1,4 @@
-# Exercise 7 - Boosted Chart
+# Exercise 04 - Boosted Chart
 
 Sometimes it happens that charts need to contain so much data that they require
 a change in the rendering method to achieve satisfactory performance. Find a way

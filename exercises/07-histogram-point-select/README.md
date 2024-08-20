@@ -1,4 +1,4 @@
-# Exercise 12 - Histogram Point Select
+# Exercise 07 - Histogram Point Select
 
 Create a chart with a following configuration:
 * Series of type `scatter` which is plotting the following dataset:

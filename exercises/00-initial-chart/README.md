@@ -1,4 +1,4 @@
-# Exercise 0 - Initial Chart
+# Exercise 00 - Initial Chart
 
 The first task is to show how to modify the basic chart elements and default settings. Your chart should look exactly like the one in the provided photo.
 
