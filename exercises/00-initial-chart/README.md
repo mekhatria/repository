@@ -10,6 +10,9 @@ In this exercise, you will learn how to:
 
 
 Your task is to modify the chart elements and default settings to exactly match the provided example. 
+
+![exercise.png](exercise.png)
+
 ## Instructions:
 1. **Titles and Credits**
 * Objective
@@ -67,4 +70,3 @@ Your task is to modify the chart elements and default settings to exactly match 
 
 
 
-![exercise.png](exercise.png)
