@@ -16,7 +16,7 @@ Learn to balance multiple series and axes within a single chart layout to mainta
 In this task, you will create a dual-axis bar chart with separate y axes (for managerial and non-managerial data). You will configure each axis and series independently to display different data sets, ensuring each axis is correctly aligned and all data points and labels are rendered as expected. Additionally, you will use a trick involving a "fake series" to create background bars, enhancing the visual clarity of the chart.
 
 
-![exercise.png](exercise.png)
+![05-separate-axes](https://github.com/user-attachments/assets/72971e74-a6d0-4586-a61e-0773523a5e12)
 
 
 ## Instructions:
