@@ -1,47 +1,114 @@
-# Highcharts Academy
 
-## Description
+# Welcome to the Highcharts Academy Repository
 
-Welcome to the `Highcharts Academy` repository! This repository is designed to help you learn and explore the Highcharts library through a series of practical exercises located in the `exercises` folder.
+This repository is your gateway to learning and exploring the Highcharts library through practical exercises. GitHub Classroom will automatically grade the exercises, making your learning journey seamless.
 
-The exercises will be automatically graded by GitHub Classroom.
+Each exercise is self-contained, allowing you to learn at your own pace. Automated tests are provided for each exercise, which you can also run locally to verify your solutions.
 
-- **Do not modify the tests** or any files outside the `/exercises` folder.
-- After committing and pushing your changes to GitHub, the autograding process will automatically start.
+Remember to carefully follow the guidelines in the `README.md` files for each task. 
 
-Each exercise is self-contained, allowing you to learn at your own pace. Automated tests are provided for each exercise, which you can run also locally to verify your solutions.
+**Good luck!** 😊
 
-Remember to carefully follow the guidelines in the `README.md` files for each task. Good luck!
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following software installed on your local machine:
+
+- **Node.js** (v14 or higher)
+- **npm** (comes with Node.js)
+- **Git**
+
+---
+
+## Setup Instructions
+
+### Step 1: Cloning the Repository
+
+First, you need to clone the repository to your local machine. To do this, follow these steps:
+
+1. Go to the GitHub Classroom link provided to you.
+2. Accept the assignment, which will create a personal copy of the repository under your GitHub account.
+3. Copy the repository URL.
+
+Now, open your terminal and run the following command to clone the repository:
+
+```bash
+git clone <your-repository-url>
+```
+
+After cloning, navigate into the project directory using the `cd` command:
+
+```bash
+cd <your-repository-name>
+```
+
+---
 
 ## Repository Structure
 
 - `exercises/` - This folder contains individual exercises. Each exercise is located in its own subfolder.
 - `tests/` - This folder contains automated tests for each exercise.
 
-## Requirements
+---
 
-To complete the exercises, you only need a web browser. However, if you wish to run the automated tests locally, you will need:
+### Step 2: Installing Dependencies
 
-- Node.js (version 14 or newer)
-- npm (Node Package Manager)
+The project requires several dependencies listed in the `package.json` file. To install them, run the following command:
 
-## Running Tests Locally
+```bash
+npm install
+```
 
-You can complete the exercises without any additional setup. However, if you want to verify your solution using the provided tests before submitting the exercises, you can run them locally.
+This will install all the necessary Node.js packages, including Cypress, which is used for running tests.
 
-1. Install the necessary dependencies:
+---
+
+### Step 3: Working on the Assignment
+
+1. Open the project in your preferred code editor (e.g., VS Code).
+2. Complete the tasks as described in the exercise `README.md` files.
+3. Regularly run the tests (explained in Step 4) to ensure your solutions are correct.
+
+---
+
+### Step 4: Running the Tests Locally
+
+Each task comes with predefined Cypress tests to help you verify your solution. To run all tests, use the following command:
+
+```bash
+npm run test-all
+```
+
+If you want to test a specific exercise, use:
+
+```bash
+npm run test-{exercise-number}
+```
+
+For example, to test exercise 2:
+
+```bash
+npm run test-02
+```
+
+---
+
+### Step 5: Submitting Your Solution
+
+Once you have completed all tasks and ensured all tests pass:
+
+1. Commit your changes:
 
     ```bash
-    npm install
+    git add .
+    git commit -m "Completed assignment"
     ```
 
-2. Run tests for a given task. Example for the exercise 00:
+2. Push your changes to the remote repository:
 
     ```bash
-    npm run test-00
+    git push origin main
     ```
 
-    Available commands:
-    - `npm run test-{exercise-number}` - runs tests for the task with the given number (`00`, `01`, etc.)
-    - `npm run test-all` - runs tests for all tasks at once
-
+Replace `main` with your branch name if you're working on a different branch.
